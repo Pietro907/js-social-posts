@@ -5,6 +5,7 @@ Ricreiamo un feed social aggiungendo al layout dello starter kit di base fornito
 
 Milestone 1
 Creiamo il nostro array di oggetti che rappresentano ciascun post.
+
 Ogni post dovrà avere le informazioni necessarie per stampare la relativa card:
 id del post, numero progressivo da 1 a n
 nome autore,
@@ -34,7 +35,12 @@ Se finite la parte logica ed i vari bonus e vi avanza tempo per giocare un pó, 
 
 */
 
-const posts = [
+//Associo gli element della DOM a delle variabili
+
+
+//Creo una variabile con l'elemento della DOM dove stampo i dati dell'array
+const container =document.getElementById('container')
+const userProfile = [
     {
         "id": 1,
         "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
@@ -91,3 +97,12 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
+console.log(userProfile);
+
+/* function template (userData) {
+
+const {name, image} = userData;
+return `<img class="profile-pic" src="https://unsplash.it/300/300?image=15" alt="Phil Mangione">`
+
+
+} */
