@@ -39,7 +39,7 @@ Se finite la parte logica ed i vari bonus e vi avanza tempo per giocare un pó, 
 
 
 //Creo una variabile con l'elemento della DOM dove stampo i dati dell'array
-const container =document.getElementById('container')
+const container = document.getElementById('container')
 const userProfile = [
     {
         "id": 1,
@@ -106,3 +106,81 @@ return `<img class="profile-pic" src="https://unsplash.it/300/300?image=15" alt=
 
 
 } */
+
+generateMarkup();
+
+function generateMarkup() {
+    for (let index = 0; index < userProfile.length; index++) {
+        const profile = userProfile[index];
+        const markupProfile = `
+        <div class="post">
+            <div class="post__header">
+                <div class="post-meta">                    
+                    <div class="post-meta__icon">
+                        <img class="profile-pic" src="https://unsplash.it/300/300?image=15" alt="Phil Mangione">                    
+                    </div>
+                    <div class="post-meta__data">
+                        <div class="post-meta__author">Phil Mangione</div>
+                        <div class="post-meta__time">4 mesi fa</div>
+                    </div>                    
+                </div>
+            </div>
+            <div class="post__text">Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.</div>
+            <div class="post__image">
+                <img src="https://unsplash.it/600/300?image=171" alt="">
+            </div>
+            <div class="post__footer">
+                <div class="likes js-likes">
+                    <div class="likes__cta">
+                        <a class="like-button  js-like-button" href="#" data-postid="1">
+                            <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                            <span class="like-button__label">Mi Piace</span>
+                        </a>
+                    </div>
+                    <div class="likes__counter">
+                        Piace a <b id="like-counter-1" class="js-likes-counter">80</b> persone
+                    </div>
+                </div> 
+            </div>            
+             
+    
+        </div>`;
+    
+    container.innerHTML = markupProfile;
+    console.log(container);
+    
+    
+    }
+    
+    
+        
+}
+const likeBtn = document.querySelector('.like-button__label');
+const counterResult = document.querySelector('.js-likes-counter');
+const counter = 80;
+counterResult.innerHTML = counter;
+
+
+
+
+    likeBtn.addEventListener('click', function() {
+        //con toggle accendo e spengo la classe ('like-button--liked');
+        likeBtn.classList.toggle('like-button--liked');
+        
+        //Se likeBtn contiene la classe ('like-button--liked')
+         if (likeBtn.classList.contains('like-button--liked')) {
+            //Stampa in counterResult counter + 1
+            counterResult.innerHTML = counter + 1;
+
+        //altrimentti
+         } else {
+            //Stampa il contatore in counterResult
+            counterResult.innerHTML = counter;
+         }
+    
+    });
+ 
+
+
+ 
+
