@@ -146,10 +146,9 @@ function generateMarkup() {
     
         </div>`;
     
-    container.innerHTML = markupProfile;
+    //Stampo a schermo e con l'operatore += aggiungo il markup tante volte quante il loop for
+    container.innerHTML += markupProfile;
     console.log(container);
-    
-    
     }
     
     
