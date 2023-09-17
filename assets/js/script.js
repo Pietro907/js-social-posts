@@ -35,8 +35,10 @@ Se finite la parte logica ed i vari bonus e vi avanza tempo per giocare un pó, 
 
 */
 
-//Associo gli element della DOM a delle variabili
-
+//Creo una variabile di appoggio con un array per pushare dentro i post che hanno gà dei like i like
+//Ogni volta che a un post metteremo il like verrà pushato qui dentro
+const havesLike = [];
+//console.log(havesLike);
 
 //Creo una variabile con l'elemento della DOM dove stampo i dati dell'array
 const container = document.getElementById('container')
@@ -107,27 +109,33 @@ return `<img class="profile-pic" src="https://unsplash.it/300/300?image=15" alt=
 
 } */
 
+
+
+
 generateMarkup();
 
-function generateMarkup() {
+function generateMarkup(markup) {
+
     for (let index = 0; index < userProfile.length; index++) {
-        const profile = userProfile[index];
+        const profileObj = userProfile[index];
+        console.log(profileObj);      
+        
         const markupProfile = `
         <div class="post">
             <div class="post__header">
                 <div class="post-meta">                    
                     <div class="post-meta__icon">
-                        <img class="profile-pic" src="https://unsplash.it/300/300?image=15" alt="Phil Mangione">                    
+                        <img class="profile-pic" src="${profileObj.author.image}" alt="Phil Mangione">                    
                     </div>
                     <div class="post-meta__data">
-                        <div class="post-meta__author">Phil Mangione</div>
-                        <div class="post-meta__time">4 mesi fa</div>
+                        <div class="post-meta__author">${profileObj.author.name}</div>
+                        <div class="post-meta__time">${profileObj.created}</div>
                     </div>                    
                 </div>
             </div>
-            <div class="post__text">Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.</div>
+            <div class="post__text">${profileObj.content}</div>
             <div class="post__image">
-                <img src="https://unsplash.it/600/300?image=171" alt="">
+                <img src="${profileObj.media}" alt="">
             </div>
             <div class="post__footer">
                 <div class="likes js-likes">
@@ -138,48 +146,86 @@ function generateMarkup() {
                         </a>
                     </div>
                     <div class="likes__counter">
-                        Piace a <b id="like-counter-1" class="js-likes-counter">80</b> persone
+                        Piace a <b id="like-counter-1" class="js-likes-counter">${profileObj.likes}</b> persone
                     </div>
                 </div> 
             </div>            
-             
-    
         </div>`;
-    
-    //Stampo a schermo e con l'operatore += aggiungo il markup tante volte quante il loop for
-    container.innerHTML += markupProfile;
-    console.log(container);
+
+        //Stampo a schermo e con l'operatore += aggiungo il markup tante volte quante il loop for
+        container.innerHTML += markupProfile;
+        console.log(container);
+
+
+
     }
     
     
+    //Funzione .push in havesLike
+    function checkLike() {
+              
+        for (let index = 0; index < userProfile.length; index++) {
+            const profileObj = userProfile[index];
+            console.log(profileObj);
+            if (profileObj.id == likeBtn.classList.contains('like-button--liked')) {
+                this.push('havesLike')
+                console.log(havesLike);
+            }
+        }
         
-}
-const likeBtn = document.querySelector('.like-button__label');
-const counterResult = document.querySelector('.js-likes-counter');
-const counter = 80;
-counterResult.innerHTML = counter;
+    }
+    
+    
 
-
-
-
-    likeBtn.addEventListener('click', function() {
+    
+    //Creazione like/unlike
+    const likeBtn = document.querySelector('.like-button__label');
+    const counterResult = document.querySelector('.js-likes-counter');
+    const counter = 80;
+    counterResult.innerHTML = counter;
+    
+    
+    
+    
+    likeBtn.addEventListener('click', function () {
         //con toggle accendo e spengo la classe ('like-button--liked');
         likeBtn.classList.toggle('like-button--liked');
         
         //Se likeBtn contiene la classe ('like-button--liked')
-         if (likeBtn.classList.contains('like-button--liked')) {
+        if (likeBtn.classList.contains('like-button--liked')) {
+            
             //Stampa in counterResult counter + 1
             counterResult.innerHTML = counter + 1;
-
-        //altrimentti
-         } else {
+            
+            //Inserisco il post id nel array vuoto se counter + 1
+            const postId = counter + 1;
+            console.log(postId);
+            if (postId > counter) {
+                checkLike();
+                console.log(' dentro haves likes');
+                
+            };
+            
+            //altrimentti
+        } else {
             //Stampa il contatore in counterResult
             counterResult.innerHTML = counter;
-         }
-    
+        }
+        
+        
     });
- 
+}
 
 
- 
+//Non funziona
 
+ /*for (const key in userProfile) {
+    const user = userProfile[key];
+    //console.log(user.author.name);
+    const author = user.author.name;
+    console.log(author);
+    const authorNameEl = document.querySelectorAll('.post-meta__author')
+    authorNameEl.innerHTML = author;
+
+
+} */
